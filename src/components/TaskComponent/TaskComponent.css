@@ -1,0 +1,22 @@
+#task {
+  display: flex;
+  justify-content: space-between ;
+  align-items: center;
+  padding: 10px 20px;
+  border: 3px solid #0000007a;
+  border-radius: 10px;
+}
+h2 {
+  width: 66%;
+  font-weight: 400;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+}
+
+#task_icons {
+  width: 28%;
+  display: flex;
+  gap: 8px;
+  margin-left: 10px;
+  justify-content: space-between;
+}

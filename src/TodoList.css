@@ -1,0 +1,35 @@
+h1 {
+    font-size: 40px;
+    color: #dfb046;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    font-weight: normal;
+}
+
+#tasks_container {
+    width: 500px;
+    max-height: 58vh;
+    overflow-y: scroll;
+    margin: 0 auto;
+    /* border: 3px solid #dfb046; */
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#theme_icon {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    
+}
+
+@media (max-width: 600px) {
+    #tasks_container {
+        width: 90%;
+    }
+}

@@ -1,0 +1,94 @@
+#editPopupOverlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#popupDialogEdit{
+    width: 600px;
+    height: 240px;
+    background-color: #F7F5E8;
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+}
+#popupDialogEdit section {
+    display: flex;
+    gap: 20px;
+}
+#popupDialogEdit span {
+    padding-top: 8px;
+}
+
+#popupDialogEdit h3 {
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+section div {
+    width: 100%;
+}
+
+#popupDialogEdit #rename_task {
+    width: 88%;
+    height: 46px;
+    border: none;
+    outline: none;
+    border: 2px solid ;
+    border-radius: 10px;
+    padding-left: 20px;
+    font-size: 20px; 
+}
+
+#popupDialogEdit #popupDialogEditButton {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+}
+#popupDialogEdit #popupDialogEditButton button {
+    border-radius: 10px;
+    border: none;
+    width: 125px;
+    height: 45px;
+    font-size: 22px;
+    cursor: pointer;
+}
+#popupDialogEdit #popupDialogEditButton button:focus {
+    border: none;
+}
+#popupDialogEdit #popupDialogEditButton button#edit_button {
+    background-color: #8EC3BD;
+    color: #fff;
+}
+#popupDialogEdit #popupDialogEditButton button#cancel_button {
+    background-color: #fff;
+    color: #414141;
+    margin-left: 10px;
+    border: 3px solid #414141 
+}
+
+/* @media (max-width: 700px) {
+    #popupDialogEdit {
+        width: fit-content;
+    }
+} */
+@media (max-width: 600px) {
+    #popupDialogEdit {
+        width: 90vw;
+    }
+    #popupDialogEdit h3 {
+        font-size: 26px
+    }
+    /* #popupDialogDelete h4 {
+        font-size: 18px;
+    } */
+}

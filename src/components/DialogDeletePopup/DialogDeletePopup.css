@@ -1,0 +1,88 @@
+#deletePopupOverlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* visibility: visible; */
+    /* visibility: hidden; */
+}
+
+#popupDialogDelete{
+    width: 600px;
+    height: 240px;
+    background-color: #F7F5E8;
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+}
+#popupDialogDelete section {
+    display: flex;
+    gap: 20px;
+}
+#popupDialogDelete span {
+    padding-top: 8px;
+}
+
+#popupDialogDelete h3 {
+    font-size: 36px;
+    font-weight: 500;
+}
+
+#popupDialogDelete h4 {
+    margin-top: 10px;
+    font-size: 22px;
+    color: #000000af;
+    font-weight: normal;
+}
+
+#popupDialogDelete #popupDialogDeleteButton {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+}
+#popupDialogDelete #popupDialogDeleteButton button {
+    border-radius: 10px;
+    border: none;
+    /* width: 125px; */
+    /* height: 45px; */
+    padding: 6px 14px;
+    font-size: 22px;
+    cursor: pointer;
+}
+#popupDialogDelete #popupDialogDeleteButton button:focus {
+    border: none;
+}
+#popupDialogDelete #popupDialogDeleteButton button#delete_button {
+    background-color: #d78083;
+    color: #fff;
+}
+#popupDialogDelete #popupDialogDeleteButton button#cancel_button {
+    background-color: #fff;
+    color: #414141;
+    margin-left: 10px;
+    border: 3px solid #414141 
+}
+
+@media (max-width: 700px) {
+    #popupDialogDelete {
+        width: fit-content;
+    }
+}
+@media (max-width: 600px) {
+    #popupDialogDelete {
+        width: 90vw;
+    }
+    #popupDialogDelete h3 {
+        font-size: 26px
+    }
+    #popupDialogDelete h4 {
+        font-size: 18px;
+    }
+}

@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Itim", cursive;
+}
+
+body {
+  background-color: #f7f5e8;
+}
+
+.dark-theme-icon {
+  fill: #dfb046;
+}
+
+.light-theme-icon {
+  fill: #000;
+}
+
+.dark-theme-background {
+  background-color: #392f4d !important;
+  color: #fff;
+}
+
+.dark-theme-background-white::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.color-white {
+  color: #fff !important;
+}
+.light-theme-background-white {
+  background-color: #fff;
+}
+
+.dark-theme-border {
+  border: 3px solid #757575 !important;
+}
+
+button[data-theme="dark"] {
+  background-color: #392f4d !important;
+  color: #fff;
+}
+
+#tasks_container::-webkit-scrollbar {
+  display: none;
+}
