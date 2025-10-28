@@ -57,8 +57,9 @@ section div {
 #popupDialogEdit #popupDialogEditButton button {
     border-radius: 10px;
     border: none;
-    width: 125px;
-    height: 45px;
+    /* width: 125px; */
+    /* height: 45px; */
+    padding: 6px 14px;
     font-size: 22px;
     cursor: pointer;
 }
@@ -91,4 +92,21 @@ section div {
     /* #popupDialogDelete h4 {
         font-size: 18px;
     } */
+}
+
+@media (max-width: 450px) {
+    #popupDialogEdit {
+        padding: 20px;
+        height: 200px;
+    }
+    #popupDialogEdit #popupDialogEditButton {
+        bottom: 20px;
+        right: 20px;
+    }
+    #popupDialogEdit #popupDialogEditButton button {
+        font-size: 16px;
+    }
+    #popupDialogEdit h3 {
+        font-size: 22px;
+    }
 }

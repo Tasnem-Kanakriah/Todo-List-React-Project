@@ -1,12 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
+import { SelectedTaskContext } from "../../context/SelectedTask";
 import { ShowDialogDeleteContext } from "../../context/ShowDialogDeleteContext";
 import { ShowDialogEditContext } from "../../context/ShowDialogEditContext";
+// import { SnackBarContext } from "../../context/SnackBarContext";
 import { TasksListContext } from "../../context/TasksListContext";
-import DialogDeletePopup from "../DialogDeletePopup/DialogDeletePopup";
-import DialogEditPopup from "../DialogEditPopup/DialogEditPopup";
+import { ThemeContext } from "../../context/ThemeContext";
 import { DeleteIcon, DoneIcon, EditIcon } from "../Icons/icons";
 import "./TaskComponent.css";
-import { ThemeContext } from "../../context/ThemeContext";
+import { useSnackBar } from "../../context/SnackBarContext";
+
 
 const TaskComponent = ({ task }) => {
     const { tasks, setTasks } = useContext(TasksListContext);
@@ -15,7 +17,14 @@ const TaskComponent = ({ task }) => {
 
     const { setShowDialogEdit } = useContext(ShowDialogEditContext)
 
-    const [selectedTaskId, setSelectedTaskId] = useState(null)
+    // const [selectedTaskId, setSelectedTaskId] = useState(null)
+
+    const { setSelectedTask } = useContext(SelectedTaskContext)
+
+    // const { showHideSnackBar } = useContext(SnackBarContext)
+    const { showHideSnackBar } = useSnackBar()
+
+    // console.log(selectedTaskId);
 
     const [theme] = useContext(ThemeContext)
 
@@ -33,27 +42,27 @@ const TaskComponent = ({ task }) => {
         localStorage.setItem("tasks", JSON.stringify(newTasks))
     }
 
-    function showDialogDeletePopup(id) {
-        setSelectedTaskId(id)
+    function showDialogDeletePopup(currentTask) {
+        setSelectedTask(currentTask)
         setShowDialogDelete(true)
     }
 
-    function showDialogEditPopup(id) {
-        setSelectedTaskId(id)
+    function showDialogEditPopup(currentTask) {
+        setSelectedTask(currentTask)
         setShowDialogEdit(true)
     }
 
-    function deleteTask() {
-        // const newTasks = tasks.filter((item) => item.id !== selectedTaskId);
-        const newTasks = tasks.filter((item) => {
-            return item.id !== selectedTaskId
-        });
-        console.log(newTasks);
-        setTasks(newTasks);
-        localStorage.setItem("tasks", JSON.stringify(newTasks))
-        setShowDialogDelete(false)
-        setSelectedTaskId(null)
-    }
+    // function deleteTask() {
+    //     // const newTasks = tasks.filter((item) => item.id !== selectedTaskId);
+    //     const newTasks = tasks.filter((item) => {
+    //         return item.id !== selectedTaskId
+    //     });
+    //     console.log(newTasks);
+    //     setTasks(newTasks);
+    //     localStorage.setItem("tasks", JSON.stringify(newTasks))
+    //     setShowDialogDelete(false)
+    //     setSelectedTaskId(null)
+    // }
 
     return (
         <div id="task" className={theme ? "dark-theme-border" : "light-theme-background-white "}>
@@ -66,23 +75,24 @@ const TaskComponent = ({ task }) => {
                     fillDoneMarkIcon={task.isDone ? "#fff" : "#8ec3bd"}
                     onClickFunc={() => {
                         editStatusDone(task.id);
+                        showHideSnackBar( task.isDone ? "Task not completed" : "Task completed")
                     }}
                 />
                 <EditIcon
                     onClickFunc={() => {
-                        showDialogEditPopup(task.id)
+                        showDialogEditPopup(task)
                     }} />
                 <DeleteIcon onClickFunc={() => {
-                    showDialogDeletePopup(task.id);
+                    showDialogDeletePopup(task);
                 }}
                 />
             </div>
-            {
+            {/* {
                 selectedTaskId === task.id && (
                     <DialogDeletePopup
                         taskTitle={task.taskTitle}
                         onClickFunc={() => {
-                            deleteTask(task.id)
+                            deleteTask()
                         }} />
                 )
             }
@@ -90,7 +100,7 @@ const TaskComponent = ({ task }) => {
                 selectedTaskId === task.id && (
                     <DialogEditPopup currentTask={task} />
                 )
-            }
+            } */}
         </div>
     );
 };

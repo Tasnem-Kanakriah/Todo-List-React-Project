@@ -4,7 +4,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { WarningIcon } from "../Icons/icons";
 import './DialogDeletePopup.css';
 
-const DialogDeletePopup = ({ onClickFunc, taskTitle }) => {
+const DialogDeletePopup = ({ onClickFunc, currentTask }) => {
 
     const { showDialogDelete, setShowDialogDelete } = useContext(ShowDialogDeleteContext)
 
@@ -25,7 +25,9 @@ const DialogDeletePopup = ({ onClickFunc, taskTitle }) => {
         >
             <div
                 id="popupDialogDelete"
-                onClick={(event) => event.stopPropagation()}
+                onClick={(event) => {
+                    event.stopPropagation()
+                }}
                 className={theme ? "dark-theme-background dark-theme-border" : ''}
             >
                 <section>
@@ -34,7 +36,7 @@ const DialogDeletePopup = ({ onClickFunc, taskTitle }) => {
                     </span>
                     <div>
                         <h3>Confirm task deletion?</h3>
-                        <h4 className={theme ? "color-white" : ''}>"{taskTitle}"</h4>
+                        <h4 className={theme ? "color-white" : ''}>"{currentTask?.taskTitle}"</h4>
                     </div>
                 </section>
                 <div id="popupDialogDeleteButton">

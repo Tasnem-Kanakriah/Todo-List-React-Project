@@ -20,3 +20,9 @@ h2 {
   margin-left: 10px;
   justify-content: space-between;
 }
+
+@media (max-width: 600px) {
+  #task {
+    border-width: 1px !important;
+  }
+}

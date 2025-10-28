@@ -15,21 +15,26 @@ h1 {
     margin: 0 auto;
     /* border: 3px solid #dfb046; */
     border-radius: 14px;
-    padding: 20px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 #theme_icon {
     position: absolute;
-    top: 40px;
-    right: 40px;
+    top: 20px;
+    right: 20px;
     
 }
 
 @media (max-width: 600px) {
     #tasks_container {
         width: 90%;
+        max-height: 55vh;
+        padding: 6PX;
+        font-size: 14px;
+        gap: 8px;
+        border-width: 1px !important;
     }
 }

@@ -1,0 +1,17 @@
+/* #8ec3bd */
+/* #df8083 */
+
+#snack-bar {
+    background-color: #dfb046;
+    border-radius: 10px;
+    position: absolute;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    left: 10px;
+    bottom: 10px;
+}
+#snack-bar span {
+    padding-top: 5px;
+}

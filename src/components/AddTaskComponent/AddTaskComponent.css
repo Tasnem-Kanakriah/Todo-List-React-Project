@@ -42,4 +42,10 @@ input::placeholder {
     #add_task_div {
         width: 90vw;
     }
+    input#add_task {
+        border-width: 1px !important;
+    }
+    #add_button {
+        font-size: 18px;
+    }
 }
