@@ -13,7 +13,7 @@ export const SnackBarProvider = ({ children }) => {
         setMessageSnackBar(message);
         setOpenSnackBar(true);
         setTimeout(() => {
-            // setOpenSnackBar(false);
+            setOpenSnackBar(false);
         }, 3000);
     }
 
