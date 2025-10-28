@@ -10,10 +10,9 @@ h1 {
 
 #tasks_container {
     width: 500px;
-    max-height: 58vh;
+    max-height: 66vh;
     overflow-y: scroll;
     margin: 0 auto;
-    /* border: 3px solid #dfb046; */
     border-radius: 14px;
     padding: 12px;
     display: flex;
@@ -25,13 +24,12 @@ h1 {
     position: absolute;
     top: 20px;
     right: 20px;
-    
 }
 
 @media (max-width: 600px) {
     #tasks_container {
         width: 90%;
-        max-height: 55vh;
+        max-height: 62vh;
         padding: 6PX;
         font-size: 14px;
         gap: 8px;
