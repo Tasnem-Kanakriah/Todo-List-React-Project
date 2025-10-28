@@ -9,6 +9,9 @@
 
 body {
   background-color: #f7f5e8;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .dark-theme-icon {
