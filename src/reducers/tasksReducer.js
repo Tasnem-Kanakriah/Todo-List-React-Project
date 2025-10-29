@@ -1,8 +1,6 @@
 import {v4 as uuid4} from "uuid"
 
 export default function taskReducer(currentTasks, action) {
-    // console.log(currentTasks);
-    // console.log(action);
 
     switch (action.type) {
         case 'added': {

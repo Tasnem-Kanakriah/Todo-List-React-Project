@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useReducer } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import TaskComponent from "../src/components/TaskComponent/TaskComponent";
 import "./TodoList.css";
 import AddTaskComponent from "./components/AddTaskComponent/AddTaskComponent";
@@ -9,13 +9,8 @@ import TasksStatus from "./components/TasksStatus/TasksStatus";
 import { SelectedTaskContext } from "./context/SelectedTask";
 import { ShowDialogDeleteContext } from "./context/ShowDialogDeleteContext";
 import { useSnackBar } from "./context/SnackBarContext";
+import { useDispatch, useTasks } from "./context/TasksListContext";
 import { TasksStatusContext } from "./context/TasksStatusContext";
-import tasksReducer from "./reducers/tasksReducer";
-
-const initializer = () => {
-    const storageTasks = localStorage.getItem("tasks");
-    return storageTasks ? JSON.parse(storageTasks) : [];
-};
 
 const TodoList = () => {
     const { taskStatus } = useContext(TasksStatusContext)
@@ -23,30 +18,31 @@ const TodoList = () => {
     const { selectedTask, setSelectedTask } = useContext(SelectedTaskContext)
     const { setShowDialogDelete } = useContext(ShowDialogDeleteContext)
 
-    const [tasks2, dispatch] = useReducer(tasksReducer, [], initializer)
+    const tasks = useTasks()
+    const dispatch = useDispatch()
 
-    console.log(tasks2);
+    console.log(tasks);
 
     useEffect(() => {
         const storageTasks = JSON.parse(localStorage.getItem("tasks")) || [];
         dispatch({ type: 'get-all-tasks', payload: storageTasks });
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
-        localStorage.setItem("tasks", JSON.stringify(tasks2));
-    }, [tasks2]);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }, [tasks]);
 
-    
+
     let completed = useMemo(() => {
-        return tasks2.filter(task => task.isDone)
-    }, [tasks2])
-    
+        return tasks.filter(task => task.isDone)
+    }, [tasks])
+
     let notCompleted = useMemo(() => {
-        return tasks2.filter(task => !task.isDone)
-    }, [tasks2])
-    
-    let tasksList = tasks2;
-    
+        return tasks.filter(task => !task.isDone)
+    }, [tasks])
+
+    let tasksList = tasks;
+
     if (taskStatus.doneIsClicked) {
         tasksList = completed
     }
