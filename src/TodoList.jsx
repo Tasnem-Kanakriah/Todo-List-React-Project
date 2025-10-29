@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo, useReducer } from "react";
 import TaskComponent from "../src/components/TaskComponent/TaskComponent";
 import "./TodoList.css";
 import AddTaskComponent from "./components/AddTaskComponent/AddTaskComponent";
@@ -8,91 +8,67 @@ import { ThemeIcon, TodoIcon } from "./components/Icons/icons";
 import TasksStatus from "./components/TasksStatus/TasksStatus";
 import { SelectedTaskContext } from "./context/SelectedTask";
 import { ShowDialogDeleteContext } from "./context/ShowDialogDeleteContext";
-// import { SnackBarContext } from "./context/SnackBarContext";
-import { TasksListContext } from "./context/TasksListContext";
-import { TasksStatusContext } from "./context/TasksStatusContext";
 import { useSnackBar } from "./context/SnackBarContext";
+import { TasksStatusContext } from "./context/TasksStatusContext";
+import tasksReducer from "./reducers/tasksReducer";
+
+const initializer = () => {
+    const storageTasks = localStorage.getItem("tasks");
+    return storageTasks ? JSON.parse(storageTasks) : [];
+};
 
 const TodoList = () => {
-
-    const { tasks, setTasks } = useContext(TasksListContext)
     const { taskStatus } = useContext(TasksStatusContext)
-    // const { showHideSnackBar } = useContext(SnackBarContext)
     const { showHideSnackBar } = useSnackBar()
+    const { selectedTask, setSelectedTask } = useContext(SelectedTaskContext)
+    const { setShowDialogDelete } = useContext(ShowDialogDeleteContext)
 
-    // ! طريقتي ! //
-    // let tasksList = tasks;
+    const [tasks2, dispatch] = useReducer(tasksReducer, [], initializer)
 
-    // if (taskStatus.doneIsClicked) {
-    //     console.log("done");
+    console.log(tasks2);
 
-    //     tasksList = tasks.filter(task => task.isDone)
-    // }
+    useEffect(() => {
+        const storageTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        dispatch({ type: 'get-all-tasks', payload: storageTasks });
+    }, []);
 
-    // if (taskStatus.undoneIsClicked) {
-    //     tasksList = tasks.filter(task => !task.isDone)
-    // }
+    useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks2));
+    }, [tasks2]);
 
-    // const TasksListComponent = (tasksList || []).map(task => (
-    //     <TaskComponent key={task.id} task={task} />
-    // ))
-    // console.log(tasksList.length);
-
-    // ! طريقة الأستاذ يعرب ! //
-    // let tasksList = tasks;
-
-    // let completed = tasks.filter(task => task.isDone) 
-    // let notCompleted = tasks.filter(task => !task.isDone) 
-
-    // if (taskStatus.doneIsClicked) {
-    //     tasksList = completed
-    // }
-
-    // if (taskStatus.undoneIsClicked) {
-    //     tasksList = notCompleted
-    // }
-
-    // const TasksListComponent = (tasksList || []).map(task => (
-    //     <TaskComponent key={task.id} task={task} />
-    // ))
-
-    // ! useMemo باستخدام  ! //
-
-    let tasksList = tasks;
-
+    
     let completed = useMemo(() => {
-        return tasks.filter(task => task.isDone)
-    }, [tasks])
-
+        return tasks2.filter(task => task.isDone)
+    }, [tasks2])
+    
     let notCompleted = useMemo(() => {
-        return tasks.filter(task => !task.isDone)
-    }, [tasks])
+        return tasks2.filter(task => !task.isDone)
+    }, [tasks2])
+    
+    let tasksList = tasks2;
+    
     if (taskStatus.doneIsClicked) {
         tasksList = completed
     }
     if (taskStatus.undoneIsClicked) {
         tasksList = notCompleted
     }
-    const TasksListComponent = (tasksList || []).map(task => (
-        <TaskComponent key={task.id} task={task} />
-    ))
-
-    const { selectedTask, setSelectedTask } = useContext(SelectedTaskContext)
-    const { setShowDialogDelete } = useContext(ShowDialogDeleteContext)
-
-    // console.log(selectedTask);
 
     function deleteTask() {
-        // const newTasks = tasks.filter((item) => item.id !== selectedTask);
-        const newTasks = tasks.filter((item) => {
-            return item.id !== selectedTask.id
-        });
-        console.log(newTasks);
-        setTasks(newTasks);
-        localStorage.setItem("tasks", JSON.stringify(newTasks))
+        dispatch({
+            type: 'deleted',
+            payload: {
+                id: selectedTask.id
+            }
+        })
+
         setShowDialogDelete(false)
         setSelectedTask(null)
     }
+
+    const TasksListComponent = (tasksList || []).map(task => (
+        <TaskComponent key={task.id} task={task} dispatch={dispatch} />
+    ))
 
     return (
         <>
@@ -102,7 +78,7 @@ const TodoList = () => {
             <h1>
                 To Do List <TodoIcon />
             </h1>
-            <AddTaskComponent />
+            <AddTaskComponent dispatch={dispatch} />
             <TasksStatus />
             <div id="tasks_container" style={{
                 border: (tasksList.length === 0) ? "none" : "3px solid #dfb046"
@@ -117,7 +93,9 @@ const TodoList = () => {
                 currentTask={selectedTask}
             />
             <DialogEditPopup
-                currentTask={selectedTask} />
+                currentTask={selectedTask}
+                dispatch={dispatch}
+            />
         </>
     );
 };

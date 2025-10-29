@@ -1,40 +1,29 @@
 import { useContext, useEffect, useState } from "react";
 import { ShowDialogEditContext } from "../../context/ShowDialogEditContext";
-import { TasksListContext } from "../../context/TasksListContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import { RenameIcon } from "../Icons/icons";
 import './DialogEditPopup.css';
 import { useSnackBar } from "../../context/SnackBarContext";
-// import { SnackBarContext } from "../../context/SnackBarContext";
 
-const DialogEditPopup = ({ currentTask }) => {
-    // console.log(currentTask);
-
-    const { tasks, setTasks } = useContext(TasksListContext);
+const DialogEditPopup = ({ currentTask, dispatch }) => {
 
     const [updateTaskTitle, setUpdateTaskTitle] = useState(currentTask?.taskTitle || "")
 
     const { showDialogEdit, setShowDialogEdit } = useContext(ShowDialogEditContext)
 
-        // const { showHideSnackBar } = useContext(SnackBarContext)
         const { showHideSnackBar } = useSnackBar()
 
     const [theme] = useContext(ThemeContext)
 
 
     function renameTask() {
-        const newTasks = tasks.map((item) => {
-            if (item.id === currentTask?.id) {
-                return {
-                    ...item,
-                    taskTitle: updateTaskTitle
-                }
+        dispatch({
+            type: 'updated',
+            payload: {
+                id: currentTask.id,
+                newTitle: updateTaskTitle
             }
-            return item;
         })
-        console.log(newTasks);
-        setTasks(newTasks);
-        localStorage.setItem("tasks", JSON.stringify(newTasks))
     }
 
     useEffect(() => {
