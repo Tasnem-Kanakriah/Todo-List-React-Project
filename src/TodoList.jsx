@@ -4,7 +4,7 @@ import "./TodoList.css";
 import AddTaskComponent from "./components/AddTaskComponent/AddTaskComponent";
 import DialogDeletePopup from "./components/DialogDeletePopup/DialogDeletePopup";
 import DialogEditPopup from "./components/DialogEditPopup/DialogEditPopup";
-import { ThemeIcon, TodoIcon } from "./components/Icons/icons";
+import { ArabicIcon, EnglishIcon, ThemeIcon, TodoIcon } from "./components/Icons/icons";
 import TasksStatus from "./components/TasksStatus/TasksStatus";
 import { SelectedTaskContext } from "./context/SelectedTask";
 import { ShowDialogDeleteContext } from "./context/ShowDialogDeleteContext";
@@ -12,16 +12,22 @@ import { useSnackBar } from "./context/SnackBarContext";
 import { useDispatch, useTasks } from "./context/TasksListContext";
 import { TasksStatusContext } from "./context/TasksStatusContext";
 
+import { useTranslation } from "react-i18next";
+
 const TodoList = () => {
     const { taskStatus } = useContext(TasksStatusContext)
     const { showHideSnackBar } = useSnackBar()
     const { selectedTask, setSelectedTask } = useContext(SelectedTaskContext)
     const { setShowDialogDelete } = useContext(ShowDialogDeleteContext)
 
+    const { t, i18n } = useTranslation()
+    // console.log(i18n.language);
+
+
     const tasks = useTasks()
     const dispatch = useDispatch()
 
-    console.log(tasks);
+    // console.log(tasks);
 
     useEffect(() => {
         const storageTasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -68,11 +74,12 @@ const TodoList = () => {
 
     return (
         <>
-            <span id="theme_icon">
+            <div id="theme_and_lang" >
                 <ThemeIcon />
-            </span>
+                {i18n.language == "ar" ? <EnglishIcon /> : <ArabicIcon />}
+            </div>
             <h1>
-                To Do List <TodoIcon />
+                {t("to_do_list")} <TodoIcon />
             </h1>
             <AddTaskComponent dispatch={dispatch} />
             <TasksStatus />
@@ -84,7 +91,7 @@ const TodoList = () => {
             <DialogDeletePopup
                 onClickFunc={() => {
                     deleteTask()
-                    showHideSnackBar("Task was deleted")
+                    showHideSnackBar(t('task_deleted'))
                 }}
                 currentTask={selectedTask}
             />

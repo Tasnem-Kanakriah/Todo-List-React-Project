@@ -11,7 +11,17 @@ import TasksProvider from './context/TasksListContext'
 import { TasksStatusContext } from './context/TasksStatusContext'
 import { ThemeContext } from './context/ThemeContext'
 
+import { useTranslation } from 'react-i18next'
+
 function App() {
+
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    localStorage.setItem("language", i18n.language)
+    document.documentElement.lang = i18n.language
+    document.documentElement.dir = i18n.language === "ar" ? "rtl" : "ltr"
+  })
 
   const ThemeApp = JSON.parse(localStorage.getItem("theme"))
 

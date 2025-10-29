@@ -6,7 +6,7 @@
 }
 
 #status_tasks button {
-    width: 100px;
+    width: 101px;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
@@ -27,11 +27,15 @@
 
 @media (max-width: 600px) {
     #status_tasks button{
-        width: 80px;
         font-size: 16px;
         font-weight: 600;
     }
     #status_tasks button {
         border-width: 1px !important;
+    }
+}
+@media (max-width: 600px) {
+    #status_tasks button{
+        width: fit-content;
     }
 }

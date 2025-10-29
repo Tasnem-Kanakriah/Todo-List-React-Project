@@ -2,8 +2,11 @@ import { useContext } from "react";
 import { TasksStatusContext } from "../../context/TasksStatusContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import './TasksStatus.css';
+import { useTranslation } from "react-i18next";
 
 const TasksStatus = () => {
+
+    const {t, i18n} = useTranslation()
 
     const { taskStatus, setTaskStatus } = useContext(TasksStatusContext)
 
@@ -28,7 +31,7 @@ const TasksStatus = () => {
                 }}
                 id="all_tasks_button"
             >
-                All
+                {t('all')}
             </button>
             <button
                 data-theme={theme ? "dark" : "light"}
@@ -47,7 +50,7 @@ const TasksStatus = () => {
                 }}
                 id="done_tasks_button"
             >
-                Done
+                {t('done')}
             </button>
             <button
                 data-theme={theme ? "dark" : "light"}
@@ -66,7 +69,7 @@ const TasksStatus = () => {
                 }}
                 id="undone_tasks_button"
             >
-                Undone
+                {t('un_done')}
             </button>
         </div>
     )

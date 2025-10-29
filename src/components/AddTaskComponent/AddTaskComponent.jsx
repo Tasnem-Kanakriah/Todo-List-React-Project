@@ -1,8 +1,13 @@
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import "./AddTaskComponent.css";
+import { useTranslation } from "react-i18next";
 
-const AddTaskComponent = ({ dispatch }) => {    
+
+const AddTaskComponent = ({ dispatch }) => {
+
+    const { t } = useTranslation()
+
     const [newTask, setNewTask] = useState({ id: null, taskTitle: "" });
 
     const [theme] = useContext(ThemeContext)
@@ -23,7 +28,7 @@ const AddTaskComponent = ({ dispatch }) => {
                 id="add_task"
                 type="text"
                 className={theme ? "dark-theme-background dark-theme-background-white" : "light-theme-background-white"}
-                placeholder="Add a new task"
+                placeholder={t("add_placeholder")}
                 value={newTask.taskTitle}
                 onChange={(event) => {
                     setNewTask((prev) => ({ ...prev, taskTitle: event.target.value }))
@@ -39,7 +44,7 @@ const AddTaskComponent = ({ dispatch }) => {
                 id="add_button"
                 onClick={addNewTask}
             >
-                Add
+                {t('add')}
             </button>
         </div>
     );

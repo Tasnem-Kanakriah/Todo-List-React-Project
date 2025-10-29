@@ -2,14 +2,16 @@ import { useContext } from "react";
 import { SelectedTaskContext } from "../../context/SelectedTask";
 import { ShowDialogDeleteContext } from "../../context/ShowDialogDeleteContext";
 import { ShowDialogEditContext } from "../../context/ShowDialogEditContext";
+import { useSnackBar } from "../../context/SnackBarContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import { DeleteIcon, DoneIcon, EditIcon } from "../Icons/icons";
 import "./TaskComponent.css";
-import { useSnackBar } from "../../context/SnackBarContext";
+import { useTranslation } from "react-i18next";
 
 
 const TaskComponent = ({ task, dispatch }) => {
-    
+
+    const {t} = useTranslation()
 
     const { setShowDialogDelete } = useContext(ShowDialogDeleteContext)
 
@@ -52,7 +54,7 @@ const TaskComponent = ({ task, dispatch }) => {
                     fillDoneMarkIcon={task.isDone ? "#fff" : "#8ec3bd"}
                     onClickFunc={() => {
                         editStatusDone();
-                        showHideSnackBar( task.isDone ? "Task not completed" : "Task completed")
+                        showHideSnackBar(task.isDone ? t('task_done') : t('task_undone'))
                     }}
                 />
                 <EditIcon

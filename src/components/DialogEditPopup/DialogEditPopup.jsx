@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { ShowDialogEditContext } from "../../context/ShowDialogEditContext";
+import { useSnackBar } from "../../context/SnackBarContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import { RenameIcon } from "../Icons/icons";
 import './DialogEditPopup.css';
-import { useSnackBar } from "../../context/SnackBarContext";
+
+import { useTranslation } from "react-i18next";
 
 const DialogEditPopup = ({ currentTask, dispatch }) => {
 
@@ -11,9 +13,11 @@ const DialogEditPopup = ({ currentTask, dispatch }) => {
 
     const { showDialogEdit, setShowDialogEdit } = useContext(ShowDialogEditContext)
 
-        const { showHideSnackBar } = useSnackBar()
+    const { showHideSnackBar } = useSnackBar()
 
     const [theme] = useContext(ThemeContext)
+
+    const { t } = useTranslation()
 
 
     function renameTask() {
@@ -46,7 +50,7 @@ const DialogEditPopup = ({ currentTask, dispatch }) => {
                         <RenameIcon />
                     </span>
                     <div>
-                        <h3>Rename Task!</h3>
+                        <h3>{t('rename_task')}</h3>
                         <input
                             id="rename_task"
                             type="text"
@@ -61,11 +65,11 @@ const DialogEditPopup = ({ currentTask, dispatch }) => {
                     <button onClick={() => {
                         renameTask()
                         setShowDialogEdit(false);
-                        showHideSnackBar("Task was Edit")
-                    }} id="edit_button">Save</button>
+                        showHideSnackBar(t('task_edited'))
+                    }} id="edit_button">{t('save')}</button>
                     <button onClick={() => {
                         setShowDialogEdit(false)
-                    }} id="cancel_button">Cancel</button>
+                    }} id="cancel_button">{t('cancel')}</button>
                 </div>
             </div>
         </div>

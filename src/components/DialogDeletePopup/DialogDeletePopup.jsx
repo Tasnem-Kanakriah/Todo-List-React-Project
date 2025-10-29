@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { ShowDialogDeleteContext } from "../../context/ShowDialogDeleteContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import { WarningIcon } from "../Icons/icons";
@@ -9,6 +10,8 @@ const DialogDeletePopup = ({ onClickFunc, currentTask }) => {
     const { showDialogDelete, setShowDialogDelete } = useContext(ShowDialogDeleteContext)
 
     const [theme] = useContext(ThemeContext)
+
+    const { t } = useTranslation()
 
     return (
         <div
@@ -35,15 +38,15 @@ const DialogDeletePopup = ({ onClickFunc, currentTask }) => {
                         <WarningIcon />
                     </span>
                     <div>
-                        <h3>Confirm task deletion?</h3>
+                        <h3>{t('confirm_delete_task')}</h3>
                         <h4 className={theme ? "color-white" : ''}>"{currentTask?.taskTitle}"</h4>
                     </div>
                 </section>
                 <div id="popupDialogDeleteButton">
-                    <button onClick={onClickFunc} id="delete_button">Delete</button>
+                    <button onClick={onClickFunc} id="delete_button">{t('delete')}</button>
                     <button onClick={() => {
                         setShowDialogDelete(false)
-                    }} id="cancel_button">Cancel</button>
+                    }} id="cancel_button">{t('cancel')}</button>
                 </div>
             </div>
         </div>

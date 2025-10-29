@@ -14,7 +14,6 @@
 
 #popupDialogEdit{
     width: 600px;
-    height: 240px;
     background-color: #F7F5E8;
     border-radius: 20px;
     padding: 40px;
@@ -45,20 +44,19 @@ section div {
     outline: none;
     border: 2px solid ;
     border-radius: 10px;
-    padding-left: 20px;
+    padding-inline: 20px;
     font-size: 20px; 
 }
 
 #popupDialogEdit #popupDialogEditButton {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
 }
 #popupDialogEdit #popupDialogEditButton button {
     border-radius: 10px;
     border: none;
-    /* width: 125px; */
-    /* height: 45px; */
     padding: 6px 14px;
     font-size: 22px;
     cursor: pointer;
@@ -77,11 +75,6 @@ section div {
     border: 3px solid #414141 
 }
 
-/* @media (max-width: 700px) {
-    #popupDialogEdit {
-        width: fit-content;
-    }
-} */
 @media (max-width: 600px) {
     #popupDialogEdit {
         width: 90vw;
@@ -89,9 +82,6 @@ section div {
     #popupDialogEdit h3 {
         font-size: 26px
     }
-    /* #popupDialogDelete h4 {
-        font-size: 18px;
-    } */
 }
 
 @media (max-width: 450px) {
